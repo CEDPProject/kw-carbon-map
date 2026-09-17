@@ -1,0 +1,14 @@
+diff a/src/views/info.ejs b/src/views/info.ejs	(rejected hunks)
+@@ -44,6 +44,12 @@
+                       id="txtProductDt"
+                       style="border-bottom: 1px solid #aaa"
+                     ></div>
++                    <div
++                      class="col"
++                      style="border-bottom: 1px solid #aaa; text-align: right"
++                    >
++                      <a href="/control" class="btn btn-sm btn-primary">제어 페이지</a>
++                    </div>
+                   </div>
+                   <h1 style="font-weight: 800">측정 데이터 조회</h1>
+                   <div class="form-group mt20;" style="display: flex">

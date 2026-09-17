@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ko" class="theme_bl">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1920, initial-scale=1, shrink-to-fit=no" />
+  <meta name="format-detection" content="telephone=no, address=no, email=no" />
+  <meta name="title" content="default page" />
+  <meta name="keywords" content="default page" />
+  <meta name="description" content="default page" />
+  <meta name="url" content="." />
+  <meta name="image" content="/img/og_img.jpg" />
+  <meta property="og:title" content="default page" />
+  <meta property="og:keywords" content="default page" />
+  <meta property="og:description" content="default page" />
+  <meta property="og:url" content="." />
+  <meta property="og:image" content="/img/og_img.jpg" />
+  <meta property="og:type" content="website" />
+  <title>탄소 모니터링 플랫폼</title>
+  <!--style-->
+  <link rel="stylesheet" href="/default.css" />
+  <link rel="stylesheet" href="/content.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" href="/slick.css" />
+  <link rel="stylesheet" href="/slick-theme.css" />
+
+  <script src="https://kit.fontawesome.com/d4f08c1bb4.js" crossorigin="anonymous"></script>
+  <!--script-->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="/common.js"></script>
+  <script type="module" src="/main.js"></script>
+  <script type="text/javascript" src="/lib/slick.js"></script>
+  <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+  <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+  <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+  <script src="/lib/ko_KR.js"></script>
+
+  <script type="module" src="/monitoring/monitoring-main.js"></script>
+  <!-- <script type="module" src="/monitoring/monitoring-list.js"></script> -->
+
+  <script type="text/javascript">
+    function initSlider() {
+      $("#sliderZone").slick({
+        // infinite: true,
+        // lazyLoad: 'ondemand',
+        // speed: 500,
+        // autoplaySpeed: 5000,
+        // pauseOnHover: false,
+        // pauseOnFocus : true,
+        // fade: false,
+        // arrows: true,
+        // cssEase: 'linear',
+        // swipe: true,
+        // autoplay: true,
+        // swipeToSlide: true,
+        // touchThreshold: 10,
+        // draggable: false,
+        // appendArrows: '.sslideer_controler'
+      });
+    }
+    $(document).ready(function () {
+      const formatDate = () => {
+        const date = new Date()
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // 0부터 시작하므로 +1
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+
+        return `${year}년 ${month}월 ${day}일 ${hours}:${minutes}`;
+      };
+
+      const now = new Date();
+
+      $("#header_time").html(formatDate())
+      initSlider();
+      $(".btns").on("click", function (e) {
+        e.preventDefault();
+        if (jQuery(this).hasClass("pause")) {
+          // add class where you want to add class active for process
+          jQuery(this).removeClass("pause");
+          currentPlayEvent = "stop";
+
+          jQuery(".slider").slick("slickPause");
+          jQuery(this).addClass("play");
+        } else {
+          jQuery(this).removeClass("play");
+          jQuery(this).addClass("pause");
+          currentPlayEvent = "play";
+
+          $(".slider").slick("slickPlay");
+        }
+      });
+      $(".map_sel1, .map_sel2").click(function () {
+        var mapBox = $(this).parents().find(".map_stitl");
+        var mapBox2 = $(this).parents().next();
+        console.log(mapBox2);
+        if (mapBox.hasClass("on")) {
+          mapBox.removeClass("on");
+          mapBox2.slideUp(250);
+        } else {
+          mapBox.addClass("on");
+          mapBox2.slideDown(250);
+        }
+      });
+    });
+  </script>
+  <!-- script -->
+</head>
+
+<body>
+
+  <div class="body_wrap">
+    <header>
+      <h1><a href=""><img src="/src/images/icon_menu.png" width="22" height="22" alt=""></a>인류세의 기후 테크 역량 강화를 위한 기후 환경
+        데이터 구축
+        처리 플랫폼 | 탄소 모니터링 데이터 조회</h1>
+      <span class="time" id="header_time">2025년 06월 05일 14:02</span>
+    </header>
+  </div>
+  <div class="wrapper">
+    <div class="wrap clear">
+      <div id="header" class="header2">
+        <div class="logo">
+          <a href="/monitoring">탄소 모니터링 플랫폼</a>
+        </div>
+        <div class="gnb">
+          <ul class="depth1">
+            <li>
+              <a href="javascript:;" class="hasdept">모니터링</a>
+              <ul class="depth2">
+                <li>
+                  <a href="/monitoring" class="active">실외 공기질 현황</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="javascript:;" class="hasdept">분석</a>
+              <ul class="depth2">
+                <li><a href="/analysis/graph">그래프 분석</a></li>
+                <li><a href="/analysis/data">데이터 분석</a></li>
+                <li><a href="/analysis/statistics">통계 분석</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="/greenhouse">온실가스 지도</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+      <div id="container">
+        <div class="cnt_wrap">
+          <div class="cnt_top">
+            <div class="container">
+              <h2 class="header_main_title">모니터링</h2>
+              <h3 class="header_sub_title">실외공기질 현황</h3>
+
+
+            </div>
+          </div>
+          <!-- contents_header -->
+          <div class="contents_header mcontainer_contents_header">
+            <div class="container">
+              <!-- 스테이션 정보 -->
+              <div class="left">
+                <!-- <div class="form_group">
+                      <label class="form_label">계정</label>
+                      <select class="form_select form_select_inline" id="memberSelector">
+                          <option value="">전체</option>
+                              <option value="128" selected="selected">kw1@korea.kr</option>
+                              <option value="802">kw2@korea.kr</option>
+                              <option value="1695">kw3@korea.kr</option>
+                              <option value="1696">kw4@korea.kr</option>
+                              <option value="1697">kw5@korea.kr</option>
+                              <option value="1923">kw6@korea.kr</option>
+                              <option value="1939">kw7@korea.kr</option>
+                              <option value="2023">kw8@korea.kr</option>
+                              <option value="2094">kw9@korea.kr</option>
+                              <option value="2095">kw10@korea.kr</option>
+                              <option value="2096">kw11@korea.kr</option>
+                      </select>
+                  </div> -->
+                <div class="form_group">
+                  <label class="form_label">스테이션</label>
+                  <select class="form_select form_select_inline" data-custom-id="custom" data-custom-class="custom"
+                    id="deviceSelector">
+                    <!-- <option value="IT2WW1900200" data-devicetype="IAQ" selected="selected" class="no_select"> 
+                                                AI라운지
+                                            </option> -->
+                  </select>
+                </div>
+              </div>
+              <!-- //스테이션 정보 -->
+              <div class="center">
+                <p class="text_gray" id="deviceCountZone">
+                  <strong class="text_primary"> 1 </strong>개의 기기가
+                  등록되어 있습니다.
+                </p>
+              </div>
+
+              <!-- 모니터링 모드 -->
+              <!-- <div class="right">
+                <ul class="mode_box">
+                  <li class="on">
+                    <a href="index.html">전광판 모드</a>
+                  </li>
+                  <li>
+                    <a href="list.html">리스트 모드</a>
+                  </li>
+                </ul>
+              </div> -->
+              <!-- //모니터링 모드 -->
+            </div>
+          </div>
+          <!-- //contents_header -->
+          <!-- mcontainer_wrap -->
+          <div class="contents_wrap mcontainer_wrap">
+            <!-- opt_updata -->
+            <div class="opt_updata">
+              <p class="updata">
+                <span id="dataUpdateTime">업데이트 시간 : </span>
+              </p>
+              <p class="updata">
+                <span id="updateTime">데이터시간 : </span>
+                <span class="device_status">수신상태
+                  <strong id="deviceStatus" class="oks">양호</strong></span>
+              </p>
+              <!-- <a href="#layer" class="option btn-layer">
+                                      <img src="/option_icon1.png" alt="option">
+                                  </a> -->
+            </div>
+            <!-- //opt_updata -->
+            <!-- panel_box -->
+            <ul class="panel_box">
+              <!-- lft_panel -->
+              <li class="lft_panel">
+                <!-- slider -->
+                <div class="sslideer">
+                  <div class="sslideer_bottom">
+                    <div class="slide-count-wrap">
+                      <span class="current">1</span> /
+                      <span class="total">20</span>
+                    </div>
+                    <div class="sslideer_controler">
+                      <button class="btns play"></button>
+                    </div>
+                  </div>
+                  <div class="slider" id="sliderZone">
+                    <!-- 기기 slide -->
+                    <!-- <div class="slick-slide">
+                                                  <div class="iaq_home">
+                                                      <h5>실내공기측정기(IAQ)</h5>
+                                                      <div class="device">
+                                                          <img src="/IAQ.png" alt="" class="router_pic">
+                                                          <div class="iaq_infor">
+                                                              <dl class="statis">
+                                                                  <dt>스테이션 이름</dt>
+                                                                  <dd><strong>IAQ-C7 03</strong></dd>
+                                                              </dl>
+                                                              <dl class="prod_num">
+                                                                  <dt>기기고유번호</dt>
+                                                                  <dd><strong>IS70W2000796</strong></dd>
+                                                              </dl>
+                                                              <dl class="smap">
+                                                                  <dt>위치</dt>
+                                                                  <dd><strong>업무시설 &gt; 사무실</strong></dd>
+                                                              </dl>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div> -->
+                    <!-- //기기 slide -->
+                    <!-- 기기 slide -->
+                    <!-- <div class="slick-slide">
+                                                  <div class="iaq_home">
+                                                      <h5>실외공기측정기(OAQ)</h5>
+                                                      <div class="device">
+                                                          <img src="/OAQ.png" alt="" class="router_pic2">
+                                                          <div class="iaq_infor">
+                                                              <dl class="statis">
+                                                                  <dt>스테이션 이름</dt>
+                                                                  <dd><strong>연서도서관 실외</strong></dd>
+                                                              </dl>
+                                                              <dl class="prod_num">
+                                                                  <dt>기기 고유 번호</dt>
+                                                                  <dd><strong>OCS1L2000005</strong></dd>
+                                                              </dl>
+                                                              <dl class="smap">
+                                                                  <dt>위치</dt>
+                                                                  <dd><strong>다중이용시설&gt;도서관</strong></dd>
+                                                              </dl>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div> -->
+                    <!-- //기기 slide -->
+                  </div>
+                </div>
+                <!-- //slider -->
+                <!-- 통합 실내 쾌적지수 -->
+                <dl class="cici_home">
+                  <dt id="factor">통합 실외 쾌적지수(COCI)</dt>
+                  <dd>
+                    <div class="w_panel">
+                      <div class="wgrah">
+                        <div id="ciciChart"></div>
+                      </div>
+                    </div>
+                  </dd>
+                </dl>
+                <!-- //통합 실내 쾌적지수 -->
+              </li>
+              <li class="rght_panel">
+                <div class="w_panel">
+                  <h4 class="wtitl">이산화탄소 (PPM)</h4>
+                  <div class="wgrah">
+                    <div id="co2Chart"></div>
+                  </div>
+                </div>
+                <div class="w_panel">
+                  <h4 class="wtitl">메탄 (PPM)</h4>
+                  <div class="wgrah">
+                    <div id="ch4Chart"></div>
+                  </div>
+                </div>
+
+                <div class="w_panel">
+                  <h4 class="wtitl">온도 (TEMP)</h4>
+                  <div class="wgrah">
+                    <div id="tempChart"></div>
+                  </div>
+                </div>
+                <div class="w_panel">
+                  <h4 class="wtitl">습도 (RH)</h4>
+                  <div class="wgrah">
+                    <div id="humiChart"></div>
+                  </div>
+                </div>
+                <div class="w_panel">
+                  <h4 class="wtitl">풍향 (°)</h4>
+                  <div class="align_middle">
+                    <span id="main-windd"></span><span>°</span>
+                  </div>
+                </div>
+                <div class="w_panel">
+                  <h4 class="wtitl">풍속 (m/s)</h4>
+                  <div class="align_middle">
+                    <span id="main-winds"></span><span>m/s</span>
+                  </div>
+                </div>
+                <div class="w_panel">
+                  <h4 class="wtitl">미세먼지 (PM<span>10</span>)</h4>
+                  <div class="wgrah">
+                    <div id="pm10Chart"></div>
+                  </div>
+                </div>
+                <div class="w_panel">
+                  <h4 class="wtitl">초미세먼지 (PM<span>2.5</span>)</h4>
+                  <div class="wgrah">
+                    <div id="pm25Chart"></div>
+                  </div>
+                </div>
+
+                <!-- <div class="w_panel none_bg">
+                                          <img src="/logo.png" alt="기본이미지">
+                                      </div> -->
+              </li>
+            </ul>
+            <!-- //pannel_box -->
+
+            <!-- 추가정보 -->
+            <!-- <div class="map_stitl">
+                                  <a href="javascript:;" class="map_sel1 ns_infor1"><span>구로구 구로3동</span>지역을 등록해주세요.</a>
+                              </div> -->
+            <div class="map_sbox">
+              <ul class="infor_list hides map_ban1 last" id="elementPanel-2">
+                <li>
+                  <dl>
+                    <dt>
+                      <div class="scon1">
+                        <span class="stitlls1">자외선</span>
+                      </div>
+                    </dt>
+                    <dd><span id="main-uv">123</span>nm</dd>
+                  </dl>
+                </li>
+                <li>
+                  <dl>
+                    <dt>
+                      <div class="scon1">
+                        <span class="stitlls1">오존</span>
+                      </div>
+                    </dt>
+                    <dd><span id="main-o3">11</span>ppm</dd>
+                  </dl>
+                </li>
+                <li>
+                  <dl>
+                    <dt>
+                      <div class="scon1">
+                        <span class="stitlls1">이산화질소</span>
+                      </div>
+                    </dt>
+                    <dd><span id="main-no2">35</span>ppm</dd>
+                  </dl>
+                </li>
+                <li>
+                  <dl>
+                    <dt>
+                      <div class="scon1">
+                        <span class="stitlls1">이산화황</span>
+                      </div>
+                    </dt>
+                    <dd>
+                      <div class="state">
+                        <span id="main-so2">52</span>ppm
+                      </div>
+                    </dd>
+                  </dl>
+                </li>
+                <li>
+                  <dl>
+                    <dt>
+                      <div class="scon1">
+                        <span class="stitlls1">일산화탄소</span>
+                      </div>
+                    </dt>
+                    <dd>
+                      <div class="state">
+                        <span id="main-co">110</span>ppm
+                      </div>
+                    </dd>
+                  </dl>
+                </li>
+                <li>
+                  <dl>
+                    <dt>
+                      <div class="scon1">
+                        <span class="stitlls1">황화수소</span>
+                      </div>
+                    </dt>
+                    <dd>
+                      <div class="state">
+                        <span id="main-h2s">110</span>ppm
+                      </div>
+                    </dd>
+                  </dl>
+                </li>
+                <li>
+                  <dl>
+                    <dt>
+                      <div class="scon1">
+                        <span class="stitlls1">암모니아</span>
+                      </div>
+                    </dt>
+                    <dd>
+                      <div class="state">
+                        <span id="main-nh3">110</span>ppm
+                      </div>
+                    </dd>
+                  </dl>
+                </li>
+                <li>
+                  <dl>
+                    <dt>
+                      <div class="scon1">
+                        <span class="stitlls1">조도</span>
+                      </div>
+                    </dt>
+                    <dd>
+                      <div class="state">
+                        <span id="main-lux">-</span>lx
+                      </div>
+                    </dd>
+                  </dl>
+                </li>
+                <li>
+                  <dl>
+                    <dt>
+                      <div class="scon1">
+                        <span class="stitlls1">온열지수</span>
+                      </div>
+                    </dt>
+                    <dd>
+                      <div class="state">
+                        <span id="main-wbgt">-</span>°C
+                      </div>
+                    </dd>
+                  </dl>
+                </li>
+                <li>
+                  <dl>
+                    <dt>
+                      <div class="scon1">
+                        <span class="stitlls1">소음</span>
+                      </div>
+                    </dt>
+                    <dd>
+                      <div class="state">
+                        <span id="main-noise">-</span>dB
+                      </div>
+                    </dd>
+                  </dl>
+                </li>
+                <!-- <li class="none_bg">
+                                          <img src="/whlogo2.png" alt="">
+                                      </li> -->
+                <!-- <li class="none_bg">
+                                          <img src="/whlogo2.png" alt="">
+                                      </li> -->
+              </ul>
+            </div>
+            <!-- //추가정보 -->
+
+            <!-- 지수 등급 / 행동 요령 -->
+            <ul class="level_box">
+              <li>
+                <div class="slevel1">
+                  <h4 class="wtitls">지수등급</h4>
+                </div>
+                <div class="level_step">
+                  <ul>
+                    <li class="lv1">매우 나쁨 ( 0 ~ 49 )</li>
+                    <li class="lv2">나쁨 ( 50 ~ 79 )</li>
+                    <li class="lv3">보통 ( 80 ~ 89 )</li>
+                    <li class="lv4">좋음 ( 90 ~ 100 )</li>
+                  </ul>
+                  <div class="lev4" id="factorGrade"></div>
+                </div>
+              </li>
+              <li>
+                <div class="slevel2">
+                  <h4 class="wtitls">행동요령</h4>
+                </div>
+                <div class="s_step" id="actionText">
+                  <p>
+                    [온도 : 더움] 실내온도 조절이 즉시 필요합니다. 냉난방
+                    장치를 작동시켜 적정온도를 유지시켜 주세요.
+                  </p>
+                  <p>
+                    [습도 : 건조] 습도로 인해 건강이 위협받을 수 있으니,
+                    가습/제습 장치를 작동시켜 습도를 조절해주세요.
+                  </p>
+                  <p>
+                    [소음 : 나쁨] 소음공해가 발생되고 있습니다. 소음원인을
+                    확인하고 원인을 제거하기 바랍니다.
+                  </p>
+                </div>
+                <div class="whpg"></div>
+              </li>
+            </ul>
+            <!-- //지수 등급 / 행동 요령 -->
+          </div>
+          <!-- //mcontainer_wrap -->
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

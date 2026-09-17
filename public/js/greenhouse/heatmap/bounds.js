@@ -1,0 +1,15 @@
+/**
+ * 각 방향으로 가로/세로 폭의 ratio 만큼 범위를 넓힌다.
+ * 예) ratio 0.2 → 좌우 각각 경도 폭의 20%, 상하 각각 위도 폭의 20%
+ */
+export function padBounds(bounds, ratio) {
+    const lonPad = (bounds.east - bounds.west) * ratio;
+    const latPad = (bounds.north - bounds.south) * ratio;
+    return {
+        west: bounds.west - lonPad,
+        south: bounds.south - latPad,
+        east: bounds.east + lonPad,
+        north: bounds.north + latPad,
+    };
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYm91bmRzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vZnJvbnRlbmQvZ3JlZW5ob3VzZS9oZWF0bWFwL2JvdW5kcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQTs7O0dBR0c7QUFDSCxNQUFNLFVBQVUsU0FBUyxDQUFDLE1BQWlCLEVBQUUsS0FBYTtJQUN4RCxNQUFNLE1BQU0sR0FBRyxDQUFDLE1BQU0sQ0FBQyxJQUFJLEdBQUcsTUFBTSxDQUFDLElBQUksQ0FBQyxHQUFHLEtBQUssQ0FBQztJQUNuRCxNQUFNLE1BQU0sR0FBRyxDQUFDLE1BQU0sQ0FBQyxLQUFLLEdBQUcsTUFBTSxDQUFDLEtBQUssQ0FBQyxHQUFHLEtBQUssQ0FBQztJQUNyRCxPQUFPO1FBQ0wsSUFBSSxFQUFFLE1BQU0sQ0FBQyxJQUFJLEdBQUcsTUFBTTtRQUMxQixLQUFLLEVBQUUsTUFBTSxDQUFDLEtBQUssR0FBRyxNQUFNO1FBQzVCLElBQUksRUFBRSxNQUFNLENBQUMsSUFBSSxHQUFHLE1BQU07UUFDMUIsS0FBSyxFQUFFLE1BQU0sQ0FBQyxLQUFLLEdBQUcsTUFBTTtLQUM3QixDQUFDO0FBQ0osQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB0eXBlIHsgR2VvQm91bmRzIH0gZnJvbSAnLi4vYXBpL2luZGV4LmpzJztcblxuLyoqXG4gKiDqsIEg67Cp7Zal7Jy866GcIOqwgOuhnC/shLjroZwg7Y+t7J2YIHJhdGlvIOunjO2BvCDrspTsnITrpbwg64ST7Z6M64ukLlxuICog7JiIKSByYXRpbyAwLjIg4oaSIOyijOyasCDqsIHqsIEg6rK964+EIO2PreydmCAyMCUsIOyDge2VmCDqsIHqsIEg7JyE64+EIO2PreydmCAyMCVcbiAqL1xuZXhwb3J0IGZ1bmN0aW9uIHBhZEJvdW5kcyhib3VuZHM6IEdlb0JvdW5kcywgcmF0aW86IG51bWJlcik6IEdlb0JvdW5kcyB7XG4gIGNvbnN0IGxvblBhZCA9IChib3VuZHMuZWFzdCAtIGJvdW5kcy53ZXN0KSAqIHJhdGlvO1xuICBjb25zdCBsYXRQYWQgPSAoYm91bmRzLm5vcnRoIC0gYm91bmRzLnNvdXRoKSAqIHJhdGlvO1xuICByZXR1cm4ge1xuICAgIHdlc3Q6IGJvdW5kcy53ZXN0IC0gbG9uUGFkLFxuICAgIHNvdXRoOiBib3VuZHMuc291dGggLSBsYXRQYWQsXG4gICAgZWFzdDogYm91bmRzLmVhc3QgKyBsb25QYWQsXG4gICAgbm9ydGg6IGJvdW5kcy5ub3J0aCArIGxhdFBhZCxcbiAgfTtcbn1cbiJdfQ==

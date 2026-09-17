@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p D:/Project/iitp-clim-env/public/css/control)",
+      "Bash(mkdir -p D:/Project/iitp-clim-env/public/js/control)",
+      "Bash(python:*)",
+      "Bash(head -30 \"D:/Project/iitp-clim-env/public/html/\"*.html)",
+      "Bash(python3 -c \"import json; data=json.load\\(open\\('D:/Project/iitp-clim-env/public/json/control.json'\\)\\); print\\(f'Total commands: {len\\(data\\)}'\\); print\\(f'Last row_index: {data[-1][\\\\\"row_index\\\\\"]}'\\)\")",
+      "Bash(node -e \"const d=require\\('./public/json/control.json'\\); console.log\\('Total:', d.length, 'Last:', d[d.length-1].row_index\\)\")",
+      "Bash(xargs ls *)",
+      "Bash(ls -la \"D:\\\\\\\\Project\\\\\\\\iitp-clim-env\\\\\\\\src\\\\\\\\views\")",
+      "Bash(find \"D:\\\\\\\\Project\\\\\\\\iitp-clim-env\" -type d -name \"views\")",
+      "Bash(find \"D:\\\\\\\\Project\\\\\\\\iitp-clim-env\\\\\\\\public\" -type f -name \"*.ejs\" -o -name \"*.html\")",
+      "Bash(find D:\\\\\\\\Project\\\\\\\\iitp-clim-env\\\\\\\\public *)",
+      "Bash(ls -la .env*)",
+      "Bash(grep -rn \"dotenv\" --include=\"*.ts\" --include=\"*.js\" src config)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "context7"
+  ],
+  "outputStyle": "Intermediate Developer"
+}
